@@ -1,0 +1,31 @@
+{
+  "name": "jwt-demo",
+  "version": "1.0.0",
+  "description": "Demo project, shows how to use JWT to authenticate users",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shirshendubhowmick/jwt-demo.git"
+  },
+  "keywords": [
+    "JWT",
+    "authentication"
+  ],
+  "author": "Shirshendu Bhowmick",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shirshendubhowmick/jwt-demo/issues"
+  },
+  "homepage": "https://github.com/shirshendubhowmick/jwt-demo#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongoose": "^5.0.16"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
+  }
+}
