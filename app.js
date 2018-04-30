@@ -33,5 +33,5 @@ app.post('/signup', (req, res) => {
 });
 
 app.listen(3000, () => {
-    console.log("Server running on port localhost port 3000");
+    console.log("Server running on localhost port 3000");
 });
