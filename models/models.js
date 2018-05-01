@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
 // const mongouri = require('../config/mongodb');
 
 const userSchema = new mongoose.Schema({
@@ -10,6 +11,20 @@ const userSchema = new mongoose.Schema({
     isActive: {type: Boolean, required: true}
 });
 
+userSchema.pre('save', function(next) {
+    let user = this;
+    if(user.isModified('password')) {
+        bcrypt.genSalt(10, (error, salt) => {
+            bcrypt.hash(user.password, salt, (error, hash) => {
+                user.password = hash;
+                next();
+            });
+        });
+    }
+    else {
+        next();
+    }
+});
 const userModel = mongoose.model('user', userSchema);
 
 module.exports = userModel;
