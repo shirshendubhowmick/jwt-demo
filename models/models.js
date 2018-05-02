@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
     lastName: {type: String, required: true},
     phone: {type: String, required: false, unique: true},
     password: {type: String, required: true},
+    tokens: [{type: String}],
     isActive: {type: Boolean, required: true}
 });
 
