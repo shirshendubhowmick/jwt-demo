@@ -55,7 +55,6 @@ app.post('/signup', (req, res) => {
             mongoose.connection.close();
         }).catch((errorObj) => {
             res.status(400).send({error: errorObj.message});
-            // res.status(400).send(errorObj);
         });
     }).catch((errorObj) => {
         res.status(500).send({error: errorObj.name});
@@ -83,6 +82,23 @@ app.post('/login', (req, res) => {
             else {
                 mongoose.connection.close();
                 res.status(401).send({error: "User doesn't exists or invalid password, access denied."});
+            }
+        }).catch((errorObj) => {
+            res.status(400).send({error: errorObj.message});
+        });
+    }).catch((errorObj) => {
+        res.status(500).send({error: errorObj.name});
+    });
+});
+
+app.delete('/logout', authenticate, (req, res) => {
+    mongoose.connect(mongouri).then(() => {
+        userModel.update({_id: req.user._id}, { $pull: {tokens: req.header('x-auth')}}).then((data) =>{
+            if (data.nModified === 1 && data.ok === 1) {
+                res.send({status: "ok", msg: "User logged out."});
+            }
+            else {
+                res.status(400).send({error: "Error logging out user."});    
             }
         }).catch((errorObj) => {
             res.status(400).send({error: errorObj.message});
