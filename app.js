@@ -17,7 +17,7 @@ const authenticate = (req, res, next) => {
     try {
         decoded = jwt.verify(token, secret_key);
         mongoose.connect(mongouri).then(() => {
-            userModel.findById(decoded._id).then((user) => {
+            userModel.findOne({_id: decoded._id, tokens: token}).then((user) => {
                 if(user) {
                     req.user = user;
                     next();
