@@ -50,8 +50,7 @@ app.post('/signup', (req, res) => {
                               phone: req.body.phone,
                               isActive: true});
         user.save().then((msg) => {
-            let token = jwt.sign({email: req.body.email, _id: msg._id}, secret_key)
-            res.header('x-auth', token).send({email: req.body.email});
+            res.send({status: "ok", msg: "User created."});
             mongoose.connection.close();
         }).catch((errorObj) => {
             res.status(400).send({error: errorObj.message});
