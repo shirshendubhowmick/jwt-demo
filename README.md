@@ -24,7 +24,7 @@ The userSchema has basic information about a user, such as:
 * password (hashed)
 * isActive
 
-Some of the basic validation is also added, more information on it refer to the models/models.js file.
+Some of the basic validation is also added, for more information on it refer to the models/models.js file.
 
 * #### The app:
 The entry point of this app is the app.js file.
