@@ -7,7 +7,7 @@ const mongouri = require('./config/mongodb');
 const bcrypt = require('bcryptjs');
 
 const app = express();
-const secret_key = "thats_really_a_secret";
+const secret_key = "thats_really_a_secret";  // enter your secret key here for signing JWT
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({extended: true}));
