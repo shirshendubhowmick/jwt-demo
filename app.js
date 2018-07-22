@@ -50,8 +50,8 @@ app.post('/signup', (req, res) => { // the POST signup route
                               phone: req.body.phone,
                               isActive: true});
         user.save().then((msg) => {   // save data to database, if mongoose validation passes
-            res.send({status: "ok", msg: "User created."});
             mongoose.connection.close();
+            res.send({status: "ok", msg: "User created."});
         }).catch((errorObj) => {
             res.status(400).send({error: errorObj.message});    // if mongoose validation fails throw error
         });
