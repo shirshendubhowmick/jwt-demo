@@ -80,6 +80,9 @@ Refer to the screenshot below, it shows a successful GET users request:
 
 For more information please refer to the code, as it has self explanatory comments added.
 
+### Update
+A new file app.new.js added which has exactly the same functionality as app.js but this is created with Async Await instead of promise chaining.
+
 __If you need any help and face a bug or an issue, please contact me or raise it in GitHub.__
 
 *__Thank You__*
