@@ -23,9 +23,11 @@ const authenticate = (req, res, next) => {  //The authenticate middleware
                     next();  //executes when successfully authenticated
                 }
                 else {
+                    mongoose.connection.close();
                     res.status(401).send({error: "User doesn't exists, access denied."});   //throw error if authentication is unsuccessful
                 }
             }).catch((errorObj) => {
+                mongoose.connection.close();
                 res.status(401).send({error: errorObj.name});
             });
         }).catch((errorObj) => {
@@ -33,6 +35,7 @@ const authenticate = (req, res, next) => {  //The authenticate middleware
         });
     }
     catch (error) {
+        mongoose.connection.close();
         res.status(401).send({error: "Invalid token, access denied."});  // throw error if token verification fails
     }
 };
@@ -53,6 +56,7 @@ app.post('/signup', (req, res) => { // the POST signup route
             mongoose.connection.close();
             res.send({status: "ok", msg: "User created."});
         }).catch((errorObj) => {
+            mongoose.connection.close();
             res.status(400).send({error: errorObj.message});    // if mongoose validation fails throw error
         });
     }).catch((errorObj) => {
@@ -83,6 +87,7 @@ app.post('/login', (req, res) => {  // the POST login route, use to login users 
                 res.status(401).send({error: "User doesn't exists or invalid password, access denied."});
             }
         }).catch((errorObj) => {
+            mongoose.connection.close();
             res.status(400).send({error: errorObj.message});
         });
     }).catch((errorObj) => {
@@ -97,9 +102,11 @@ app.delete('/logout', authenticate, (req, res) => { // the DELETE logout route i
                 res.send({status: "ok", msg: "User logged out."});  // success response if token deletion is successful
             }
             else {
+                mongoose.connection.close();
                 res.status(400).send({error: "Error logging out user."});    // if token deletion is not successful then throw error
             }
         }).catch((errorObj) => {
+            mongoose.connection.close();
             res.status(400).send({error: errorObj.message});
         });
     }).catch((errorObj) => {
